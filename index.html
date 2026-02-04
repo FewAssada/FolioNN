@@ -50,6 +50,7 @@
                 <a href="#experience" class="nav-link hover:text-cyan-400 transition-colors uppercase tracking-widest text-slate-400">Experience</a>
                 <a href="#education" class="nav-link hover:text-cyan-400 transition-colors uppercase tracking-widest text-slate-400">Education</a>
                 <a href="#websites" class="nav-link hover:text-cyan-400 transition-colors uppercase tracking-widest text-slate-400">Websites</a>
+                <a href="#portfolio" class="nav-link hover:text-cyan-400 transition-colors uppercase tracking-widest text-slate-400">Portfolio</a>
                 <a href="#contact" class="nav-link hover:text-cyan-400 transition-colors uppercase tracking-widest text-slate-400">Contact</a>
             </div>
 
@@ -69,6 +70,7 @@
                 <a href="#experience" class="text-left text-slate-300 hover:text-cyan-400 py-2 border-b border-slate-700" onclick="toggleMenu()">Experience</a>
                 <a href="#education" class="text-left text-slate-300 hover:text-cyan-400 py-2 border-b border-slate-700" onclick="toggleMenu()">Education</a>
                 <a href="#websites" class="text-left text-slate-300 hover:text-cyan-400 py-2 border-b border-slate-700" onclick="toggleMenu()">Websites</a>
+                <a href="#portfolio" class="text-left text-slate-300 hover:text-cyan-400 py-2 border-b border-slate-700" onclick="toggleMenu()">Portfolio</a>
                 <a href="#contact" class="text-left text-slate-300 hover:text-cyan-400 py-2" onclick="toggleMenu()">Contact</a>
             </div>
         </div>
@@ -569,7 +571,8 @@
                     ผมพร้อมที่จะสร้างสรรค์ผลงานที่ดีที่สุดร่วมกับคุณ
                 </p>
 
-                <div class="flex flex-col md:flex-row justify-center gap-6 md:gap-12 text-white relative z-10">
+                <!-- ปรับเป็น Grid เพื่อรองรับ 4 รายการได้สวยงาม -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center text-white relative z-10">
                     <div class="flex items-center justify-center gap-3">
                         <div class="bg-white/20 p-3 rounded-full">
                             <i data-lucide="phone" class="w-6 h-6"></i>
@@ -586,6 +589,15 @@
                         <div class="text-left">
                             <p class="text-xs text-cyan-100 uppercase">Email Me</p>
                             <p class="font-bold">repower459@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center gap-3">
+                        <div class="bg-white/20 p-3 rounded-full">
+                            <i data-lucide="message-circle" class="w-6 h-6"></i>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-xs text-cyan-100 uppercase">Add Line</p>
+                            <p class="font-bold">dgunna</p>
                         </div>
                     </div>
                     <div class="flex items-center justify-center gap-3">
