@@ -52,6 +52,14 @@
             0%, 80%, 100% { transform: scale(0); }
             40% { transform: scale(1); }
         }
+        
+        /* Fade In for Drafter */
+        .fade-enter { opacity: 0; transform: translateY(-10px); }
+        .fade-enter-active { opacity: 1; transform: translateY(0); transition: all 0.3s ease; }
+
+        /* Modal Animation */
+        .modal-enter { opacity: 0; transform: scale(0.9); }
+        .modal-enter-active { opacity: 1; transform: scale(1); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
     </style>
 </head>
 <body class="bg-slate-900 text-slate-300 selection:bg-cyan-500 selection:text-white relative">
@@ -455,7 +463,7 @@
             <div class="flex flex-col md:flex-row justify-between items-end mb-12">
                 <div>
                     <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Featured Projects</h2>
-                    <p class="text-slate-400">ผลงานโปรเจกต์ส่วนตัว</p>
+                    <p class="text-slate-400">ผลงานโปรเจกต์ส่วนตัว (กดปุ่ม ✨ เพื่อให้ AI ช่วยพรีเซนต์งาน)</p>
                 </div>
                 <a href="https://github.com/assadayut23p" target="_blank" class="hidden md:flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors">
                     View All Github <i data-lucide="external-link" class="w-4 h-4"></i>
@@ -464,116 +472,149 @@
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Project 1 -->
-                <a href="https://www.figma.com/proto/UIGOvXaehNhQz3pYDPfmaV/Figma-Basics?page-id=0:286&type=design&node-id=23-73011" target="_blank" class="group block bg-slate-900 rounded-xl overflow-hidden border border-slate-700 hover:border-cyan-500 transition-all hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]">
-                    <div class="relative overflow-hidden h-48">
+                <div class="group bg-slate-900 rounded-xl overflow-hidden border border-slate-700 hover:border-cyan-500 transition-all hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] flex flex-col">
+                    <a href="https://www.figma.com/proto/UIGOvXaehNhQz3pYDPfmaV/Figma-Basics?page-id=0:286&type=design&node-id=23-73011" target="_blank" class="relative overflow-hidden h-48 block">
                         <div class="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors z-10"></div>
                         <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&q=80&w=1000" alt="Web Design" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
-                    </div>
-                    <div class="p-6">
-                        <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider">UX/UI Design</span>
-                        <h3 class="text-xl font-bold text-white mt-2 mb-2 group-hover:text-cyan-400 transition-colors">Web Design Prototype</h3>
-                        <div class="flex items-center text-slate-400 text-sm group-hover:translate-x-2 transition-transform">
-                            View Project <i data-lucide="external-link" class="w-4 h-4 ml-2"></i>
+                    </a>
+                    <div class="p-6 flex flex-col flex-1">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider">UX/UI Design</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">Web Design Prototype</h3>
+                        <div class="mt-auto pt-4 flex gap-3">
+                            <a href="https://www.figma.com/proto/UIGOvXaehNhQz3pYDPfmaV/Figma-Basics?page-id=0:286&type=design&node-id=23-73011" target="_blank" class="flex-1 text-center py-2 text-slate-400 text-sm border border-slate-600 rounded-lg hover:text-white hover:border-slate-500 transition-colors">
+                                View Project
+                            </a>
+                            <button onclick="analyzeProject('Web Design Prototype', 'UX/UI Design')" class="flex-1 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white text-sm rounded-lg font-medium transition-all shadow-lg shadow-purple-900/20 flex items-center justify-center gap-1">
+                                <i data-lucide="sparkles" class="w-3 h-3"></i> AI Analysis
+                            </button>
                         </div>
                     </div>
-                </a>
+                </div>
+
                  <!-- Project 2 -->
-                 <a href="https://assadayut23p.github.io/GetAPI/" target="_blank" class="group block bg-slate-900 rounded-xl overflow-hidden border border-slate-700 hover:border-cyan-500 transition-all hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]">
-                    <div class="relative overflow-hidden h-48">
+                 <div class="group bg-slate-900 rounded-xl overflow-hidden border border-slate-700 hover:border-cyan-500 transition-all hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] flex flex-col">
+                    <a href="https://assadayut23p.github.io/GetAPI/" target="_blank" class="relative overflow-hidden h-48 block">
                         <div class="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors z-10"></div>
                         <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=1000" alt="GetAPI" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
-                    </div>
-                    <div class="p-6">
+                    </a>
+                    <div class="p-6 flex flex-col flex-1">
                         <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider">Development</span>
                         <h3 class="text-xl font-bold text-white mt-2 mb-2 group-hover:text-cyan-400 transition-colors">GetAPI On Github</h3>
-                        <div class="flex items-center text-slate-400 text-sm group-hover:translate-x-2 transition-transform">
-                            View Project <i data-lucide="external-link" class="w-4 h-4 ml-2"></i>
+                        <div class="mt-auto pt-4 flex gap-3">
+                            <a href="https://assadayut23p.github.io/GetAPI/" target="_blank" class="flex-1 text-center py-2 text-slate-400 text-sm border border-slate-600 rounded-lg hover:text-white hover:border-slate-500 transition-colors">
+                                View Project
+                            </a>
+                            <button onclick="analyzeProject('GetAPI On Github', 'API Integration Development')" class="flex-1 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white text-sm rounded-lg font-medium transition-all shadow-lg shadow-purple-900/20 flex items-center justify-center gap-1">
+                                <i data-lucide="sparkles" class="w-3 h-3"></i> AI Analysis
+                            </button>
                         </div>
                     </div>
-                </a>
+                </div>
+
                  <!-- Project 3 -->
-                 <a href="https://assadayut23p.github.io/passgender/" target="_blank" class="group block bg-slate-900 rounded-xl overflow-hidden border border-slate-700 hover:border-cyan-500 transition-all hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]">
-                    <div class="relative overflow-hidden h-48">
+                 <div class="group bg-slate-900 rounded-xl overflow-hidden border border-slate-700 hover:border-cyan-500 transition-all hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] flex flex-col">
+                    <a href="https://assadayut23p.github.io/passgender/" target="_blank" class="relative overflow-hidden h-48 block">
                         <div class="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors z-10"></div>
                         <img src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&q=80&w=1000" alt="Password Gen" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
-                    </div>
-                    <div class="p-6">
+                    </a>
+                    <div class="p-6 flex flex-col flex-1">
                         <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider">Web App</span>
                         <h3 class="text-xl font-bold text-white mt-2 mb-2 group-hover:text-cyan-400 transition-colors">Password Generator</h3>
-                        <div class="flex items-center text-slate-400 text-sm group-hover:translate-x-2 transition-transform">
-                            View Project <i data-lucide="external-link" class="w-4 h-4 ml-2"></i>
+                        <div class="mt-auto pt-4 flex gap-3">
+                            <a href="https://assadayut23p.github.io/passgender/" target="_blank" class="flex-1 text-center py-2 text-slate-400 text-sm border border-slate-600 rounded-lg hover:text-white hover:border-slate-500 transition-colors">
+                                View Project
+                            </a>
+                            <button onclick="analyzeProject('Password Generator', 'Security Web App')" class="flex-1 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white text-sm rounded-lg font-medium transition-all shadow-lg shadow-purple-900/20 flex items-center justify-center gap-1">
+                                <i data-lucide="sparkles" class="w-3 h-3"></i> AI Analysis
+                            </button>
                         </div>
                     </div>
-                </a>
+                </div>
                 
-                <!-- Project 4 (New Item) -->
-                <a href="https://www.figma.com/proto/iCr36ENMOxpWrG5ih0Ych6/E-GAT2?node-id=202-53015&t=742xMa0plq0fp4sN-0&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1" target="_blank" class="group block bg-slate-900 rounded-xl overflow-hidden border border-slate-700 hover:border-cyan-500 transition-all hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]">
-                    <div class="relative overflow-hidden h-48">
+                <!-- Project 4 -->
+                <div class="group bg-slate-900 rounded-xl overflow-hidden border border-slate-700 hover:border-cyan-500 transition-all hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] flex flex-col">
+                    <a href="https://www.figma.com/proto/iCr36ENMOxpWrG5ih0Ych6/E-GAT2?node-id=202-53015&t=742xMa0plq0fp4sN-0&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1" target="_blank" class="relative overflow-hidden h-48 block">
                         <div class="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors z-10"></div>
                         <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=1000" alt="E-GAT2 Prototype" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
-                    </div>
-                    <div class="p-6">
+                    </a>
+                    <div class="p-6 flex flex-col flex-1">
                         <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider">UX/UI Design</span>
                         <h3 class="text-xl font-bold text-white mt-2 mb-2 group-hover:text-cyan-400 transition-colors">E-GAT2 System Prototype</h3>
-                        <div class="flex items-center text-slate-400 text-sm group-hover:translate-x-2 transition-transform">
-                            View Project <i data-lucide="external-link" class="w-4 h-4 ml-2"></i>
+                        <div class="mt-auto pt-4 flex gap-3">
+                            <a href="https://www.figma.com/proto/iCr36ENMOxpWrG5ih0Ych6/E-GAT2?node-id=202-53015&t=742xMa0plq0fp4sN-0&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1" target="_blank" class="flex-1 text-center py-2 text-slate-400 text-sm border border-slate-600 rounded-lg hover:text-white hover:border-slate-500 transition-colors">
+                                View Project
+                            </a>
+                            <button onclick="analyzeProject('E-GAT2 System Prototype', 'Dashboard UX/UI')" class="flex-1 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white text-sm rounded-lg font-medium transition-all shadow-lg shadow-purple-900/20 flex items-center justify-center gap-1">
+                                <i data-lucide="sparkles" class="w-3 h-3"></i> AI Analysis
+                            </button>
                         </div>
                     </div>
-                </a>
+                </div>
 
-                <!-- Project 5 (Latest Item) -->
-                <a href="https://www.figma.com/proto/mYKi5IUDQ7mAhOxyKXSIbc/TEST?node-id=3159-14708&t=M247DteYOfhiNYzY-0&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=3159%3A79899" target="_blank" class="group block bg-slate-900 rounded-xl overflow-hidden border border-slate-700 hover:border-cyan-500 transition-all hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]">
-                    <div class="relative overflow-hidden h-48">
+                <!-- Project 5 -->
+                <div class="group bg-slate-900 rounded-xl overflow-hidden border border-slate-700 hover:border-cyan-500 transition-all hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] flex flex-col">
+                    <a href="https://www.figma.com/proto/mYKi5IUDQ7mAhOxyKXSIbc/TEST?node-id=3159-14708&t=M247DteYOfhiNYzY-0&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=3159%3A79899" target="_blank" class="relative overflow-hidden h-48 block">
                         <div class="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors z-10"></div>
-                        <!-- ใช้รูปแนว Mobile App Design -->
                         <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&q=80&w=1000" alt="App Prototype" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
-                    </div>
-                    <div class="p-6">
+                    </a>
+                    <div class="p-6 flex flex-col flex-1">
                         <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider">UX/UI Design</span>
                         <h3 class="text-xl font-bold text-white mt-2 mb-2 group-hover:text-cyan-400 transition-colors">Mobile Application Prototype</h3>
-                        <div class="flex items-center text-slate-400 text-sm group-hover:translate-x-2 transition-transform">
-                            View Project <i data-lucide="external-link" class="w-4 h-4 ml-2"></i>
+                        <div class="mt-auto pt-4 flex gap-3">
+                            <a href="https://www.figma.com/proto/mYKi5IUDQ7mAhOxyKXSIbc/TEST?node-id=3159-14708&t=M247DteYOfhiNYzY-0&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=3159%3A79899" target="_blank" class="flex-1 text-center py-2 text-slate-400 text-sm border border-slate-600 rounded-lg hover:text-white hover:border-slate-500 transition-colors">
+                                View Project
+                            </a>
+                            <button onclick="analyzeProject('Mobile Application Prototype', 'Mobile App UX/UI')" class="flex-1 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white text-sm rounded-lg font-medium transition-all shadow-lg shadow-purple-900/20 flex items-center justify-center gap-1">
+                                <i data-lucide="sparkles" class="w-3 h-3"></i> AI Analysis
+                            </button>
                         </div>
                     </div>
-                </a>
+                </div>
 
-                <!-- Project 6 (New Item) -->
-                <a href="https://www.figma.com/proto/mYKi5IUDQ7mAhOxyKXSIbc/TEST?node-id=3159-77552&t=aaEmRkbfJ0BY9kld-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=3159%3A79899" target="_blank" class="group block bg-slate-900 rounded-xl overflow-hidden border border-slate-700 hover:border-cyan-500 transition-all hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]">
-                    <div class="relative overflow-hidden h-48">
+                <!-- Project 6 -->
+                <div class="group bg-slate-900 rounded-xl overflow-hidden border border-slate-700 hover:border-cyan-500 transition-all hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] flex flex-col">
+                    <a href="https://www.figma.com/proto/mYKi5IUDQ7mAhOxyKXSIbc/TEST?node-id=3159-77552&t=aaEmRkbfJ0BY9kld-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=3159%3A79899" target="_blank" class="relative overflow-hidden h-48 block">
                         <div class="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors z-10"></div>
                         <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=1000" alt="App Feature Prototype" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
-                    </div>
-                    <div class="p-6">
+                    </a>
+                    <div class="p-6 flex flex-col flex-1">
                         <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider">UX/UI Design</span>
                         <h3 class="text-xl font-bold text-white mt-2 mb-2 group-hover:text-cyan-400 transition-colors">App Feature Design</h3>
-                        <div class="flex items-center text-slate-400 text-sm group-hover:translate-x-2 transition-transform">
-                            View Project <i data-lucide="external-link" class="w-4 h-4 ml-2"></i>
+                        <div class="mt-auto pt-4 flex gap-3">
+                            <a href="https://www.figma.com/proto/mYKi5IUDQ7mAhOxyKXSIbc/TEST?node-id=3159-77552&t=aaEmRkbfJ0BY9kld-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=3159%3A79899" target="_blank" class="flex-1 text-center py-2 text-slate-400 text-sm border border-slate-600 rounded-lg hover:text-white hover:border-slate-500 transition-colors">
+                                View Project
+                            </a>
+                            <button onclick="analyzeProject('App Feature Design', 'Feature UX/UI')" class="flex-1 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white text-sm rounded-lg font-medium transition-all shadow-lg shadow-purple-900/20 flex items-center justify-center gap-1">
+                                <i data-lucide="sparkles" class="w-3 h-3"></i> AI Analysis
+                            </button>
                         </div>
                     </div>
-                </a>
+                </div>
 
-                <!-- Project 7 (New Item: SAHA Life) -->
-                <a href="https://drive.google.com/drive/folders/18sWYRvSm-7OWsJ9dDptJtQBe5tmMbTOh?usp=sharing" target="_blank" class="group block bg-slate-900 rounded-xl overflow-hidden border border-slate-700 hover:border-cyan-500 transition-all hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]">
-                    <div class="relative overflow-hidden h-48">
+                <!-- Project 7 -->
+                <div class="group bg-slate-900 rounded-xl overflow-hidden border border-slate-700 hover:border-cyan-500 transition-all hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] flex flex-col">
+                    <a href="https://drive.google.com/drive/folders/18sWYRvSm-7OWsJ9dDptJtQBe5tmMbTOh?usp=sharing" target="_blank" class="relative overflow-hidden h-48 block">
                         <div class="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors z-10"></div>
-                        <!-- ใช้รูปแนว Business / Insurance -->
                         <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=1000" alt="SAHA Life Claim Design" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
-                    </div>
-                    <div class="p-6">
+                    </a>
+                    <div class="p-6 flex flex-col flex-1">
                         <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider">UX/UI Design</span>
                         <h3 class="text-xl font-bold text-white mt-2 mb-2 group-hover:text-cyan-400 transition-colors">SAHA Life Claim System</h3>
-                        <div class="flex items-center text-slate-400 text-sm group-hover:translate-x-2 transition-transform">
-                            View Project <i data-lucide="external-link" class="w-4 h-4 ml-2"></i>
+                        <div class="mt-auto pt-4 flex gap-3">
+                            <a href="https://drive.google.com/drive/folders/18sWYRvSm-7OWsJ9dDptJtQBe5tmMbTOh?usp=sharing" target="_blank" class="flex-1 text-center py-2 text-slate-400 text-sm border border-slate-600 rounded-lg hover:text-white hover:border-slate-500 transition-colors">
+                                View Project
+                            </a>
+                            <button onclick="analyzeProject('SAHA Life Claim System', 'Enterprise Insurance System')" class="flex-1 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white text-sm rounded-lg font-medium transition-all shadow-lg shadow-purple-900/20 flex items-center justify-center gap-1">
+                                <i data-lucide="sparkles" class="w-3 h-3"></i> AI Analysis
+                            </button>
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
             
-            <div class="mt-12 text-center md:hidden">
-                <a href="https://github.com/assadayut23p" target="_blank" class="inline-flex items-center gap-2 text-cyan-400 font-bold">
-                    View All Github <i data-lucide="external-link" class="w-4 h-4"></i>
-                </a>
-            </div>
+            <!-- Input Area (Accidentally left from chat box?) NO, this looks like fragment -->
         </div>
     </section>
 
@@ -630,6 +671,48 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- NEW FEATURE: AI Email Drafter -->
+                <div class="mt-8 relative z-10">
+                    <button onclick="toggleEmailDrafter()" class="px-6 py-2 bg-white/10 hover:bg-white/20 border border-white/30 rounded-full text-white text-sm flex items-center gap-2 mx-auto transition-all shadow-lg hover:shadow-cyan-500/30">
+                        <i data-lucide="sparkles" class="w-4 h-4 text-yellow-300"></i>
+                        ให้ AI ช่วยร่างอีเมลติดต่องาน
+                    </button>
+                    
+                    <!-- Drafter UI (Hidden by default) -->
+                    <div id="email-drafter" class="hidden max-w-lg mx-auto mt-6 bg-slate-900/90 backdrop-blur-md p-6 rounded-2xl border border-slate-700 text-left shadow-2xl transition-all duration-300 fade-enter">
+                        <h3 class="text-white font-bold mb-3 flex items-center gap-2">
+                            <i data-lucide="pen-tool" class="w-5 h-5 text-cyan-400"></i> AI Email Drafter
+                        </h3>
+                        <p class="text-slate-400 text-sm mb-4">บอกความต้องการของคุณสั้นๆ เช่น "อยากทำเว็บ E-commerce ขายเสื้อผ้า"</p>
+                        <textarea id="draft-intent" rows="2" class="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-white text-sm focus:outline-none focus:border-cyan-500 mb-4 transition-colors" placeholder="พิมพ์โจทย์ของคุณที่นี่..."></textarea>
+                        
+                        <button onclick="generateDraft()" id="btn-generate-draft" class="w-full py-2 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white rounded-lg font-medium text-sm transition-all flex justify-center items-center gap-2 shadow-lg">
+                            <i data-lucide="zap" class="w-4 h-4"></i> สร้างข้อความร่าง
+                        </button>
+
+                        <div id="draft-loading" class="hidden justify-center items-center py-4">
+                            <div class="flex gap-1">
+                                <div class="w-2 h-2 bg-cyan-400 rounded-full typing-dot"></div>
+                                <div class="w-2 h-2 bg-cyan-400 rounded-full typing-dot"></div>
+                                <div class="w-2 h-2 bg-cyan-400 rounded-full typing-dot"></div>
+                            </div>
+                        </div>
+
+                        <div id="draft-result-container" class="hidden mt-4 pt-4 border-t border-slate-700">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-xs text-slate-400">ผลลัพธ์จาก AI:</span>
+                                <button onclick="copyDraft()" class="text-xs text-cyan-400 hover:text-cyan-300 flex items-center gap-1">
+                                    <i data-lucide="copy" class="w-3 h-3"></i> คัดลอก
+                                </button>
+                            </div>
+                            <div id="draft-result" class="bg-slate-800 p-3 rounded-lg text-slate-300 text-sm leading-relaxed whitespace-pre-wrap border border-slate-700/50"></div>
+                            <a href="mailto:repower459@gmail.com" id="btn-send-mail" class="mt-3 block text-center w-full py-2 border border-slate-600 hover:border-cyan-500 text-slate-300 hover:text-white rounded-lg text-sm transition-colors">
+                                ส่งอีเมลหาคุณฟิวส์
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -648,7 +731,7 @@
         </div>
     </footer>
 
-    <!-- Chat Widget HTML -->
+    <!-- Chat Widget HTML (Restored) -->
     <div id="chat-widget-container" class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
         <!-- Chat Box -->
         <div id="chat-box" class="bg-slate-800 w-80 sm:w-96 rounded-2xl shadow-2xl border border-slate-700 overflow-hidden hidden flex-col mb-4 transform transition-all origin-bottom-right">
@@ -706,6 +789,55 @@
         </button>
     </div>
 
+    <!-- AI Project Analysis Modal -->
+    <div id="project-modal" class="fixed inset-0 z-[60] hidden items-center justify-center p-4">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeProjectModal()"></div>
+        
+        <!-- Modal Content -->
+        <div class="bg-slate-900 border border-slate-700 w-full max-w-lg rounded-2xl relative z-10 shadow-2xl overflow-hidden modal-enter flex flex-col max-h-[90vh]">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-purple-700 to-pink-700 p-6 flex justify-between items-start">
+                <div>
+                    <div class="flex items-center gap-2 text-white/90 text-sm font-medium mb-1">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i> AI Project Analysis
+                    </div>
+                    <h3 id="modal-project-title" class="text-2xl font-bold text-white leading-tight">Project Title</h3>
+                    <p id="modal-project-category" class="text-purple-100 text-sm mt-1 opacity-80">Category</p>
+                </div>
+                <button onclick="closeProjectModal()" class="text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-2 transition-colors">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            
+            <!-- Body -->
+            <div class="p-6 overflow-y-auto">
+                <!-- Loading State -->
+                <div id="modal-loading" class="flex flex-col items-center justify-center py-8 text-center space-y-4">
+                    <div class="relative w-16 h-16">
+                        <div class="absolute inset-0 border-4 border-slate-700 rounded-full"></div>
+                        <div class="absolute inset-0 border-4 border-purple-500 rounded-full border-t-transparent animate-spin"></div>
+                    </div>
+                    <p class="text-slate-400 text-sm animate-pulse">Gemini AI กำลังวิเคราะห์จุดเด่นของโปรเจกต์นี้...</p>
+                </div>
+
+                <!-- Result Content -->
+                <div id="modal-content" class="hidden">
+                    <div class="prose prose-invert prose-sm max-w-none text-slate-300 leading-relaxed">
+                        <!-- AI Content goes here -->
+                    </div>
+                    
+                    <div class="mt-6 pt-6 border-t border-slate-800 flex items-center justify-between text-xs text-slate-500">
+                        <div class="flex items-center gap-1">
+                            <i data-lucide="cpu" class="w-3 h-3"></i> Generated by Gemini 2.0 Flash
+                        </div>
+                        <div>Assadayut's Portfolio</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script>
         // Initialize Icons
@@ -728,14 +860,93 @@
         function toggleMenu() {
             mobileMenu.classList.toggle('hidden');
         }
+        
+        const apiKey = "AIzaSyAlNm2S9k7G-KKrt_9MOh9qubQnUzHpkMo"; // Updated API Key
+
+        // --- AI Email Drafter Logic ---
+        function toggleEmailDrafter() {
+            const drafter = document.getElementById('email-drafter');
+            if (drafter.classList.contains('hidden')) {
+                drafter.classList.remove('hidden');
+                setTimeout(() => drafter.classList.add('fade-enter-active'), 10);
+            } else {
+                drafter.classList.remove('fade-enter-active');
+                setTimeout(() => drafter.classList.add('hidden'), 300);
+            }
+        }
+
+        async function generateDraft() {
+            const intent = document.getElementById('draft-intent').value.trim();
+            if (!intent) return;
+            
+            const btn = document.getElementById('btn-generate-draft');
+            const loading = document.getElementById('draft-loading');
+            const resultContainer = document.getElementById('draft-result-container');
+            const resultText = document.getElementById('draft-result');
+            const mailtoLink = document.getElementById('btn-send-mail');
+
+            btn.disabled = true;
+            btn.classList.add('opacity-50');
+            loading.classList.remove('hidden');
+            loading.classList.add('flex');
+            resultContainer.classList.add('hidden');
+
+            const draftSystemPrompt = `
+                You are a professional email drafting assistant. The user wants to contact "Assadayut Duangma" (a Front End Developer & UX/UI Designer).
+                
+                Assadayut's key skills: React, Vue.js, Tailwind CSS, UX/UI Design (Figma), SEO Optimization, Data Analytics.
+                User's Intent: "${intent}"
+                
+                Task: Write a polite, professional, and concise email inquiry in Thai from the user to Assadayut.
+                - Subject line: Clear and relevant.
+                - Body: Mention the user's need and specifically reference how Assadayut's skills (e.g., if they need a website, mention his React/SEO skills) would be a good fit.
+                - Tone: Professional but approachable.
+                - Keep it under 150 words.
+                - Return ONLY the body of the email.
+            `;
+
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ role: "user", parts: [{ text: draftSystemPrompt }] }]
+                    })
+                });
+
+                const data = await response.json();
+                const draft = data.candidates?.[0]?.content?.parts?.[0]?.text || "เกิดข้อผิดพลาดในการสร้างข้อความ";
+                
+                resultText.textContent = draft;
+                mailtoLink.href = `mailto:repower459@gmail.com?subject=Inquiry from Portfolio&body=${encodeURIComponent(draft)}`;
+                
+                resultContainer.classList.remove('hidden');
+            } catch (error) {
+                console.error("Draft Error:", error);
+                resultText.textContent = "ขออภัย ระบบไม่สามารถร่างข้อความได้ในขณะนี้";
+                resultContainer.classList.remove('hidden');
+            } finally {
+                loading.classList.add('hidden');
+                loading.classList.remove('flex');
+                btn.disabled = false;
+                btn.classList.remove('opacity-50');
+            }
+        }
+
+        function copyDraft() {
+            const text = document.getElementById('draft-result').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("คัดลอกข้อความแล้ว!");
+            });
+        }
 
         // --- Chat Widget Logic ---
         const chatBox = document.getElementById('chat-box');
         const chatMessages = document.getElementById('chat-messages');
         const chatInput = document.getElementById('chat-input');
-        const submitBtn = chatInput.nextElementSibling;
+        const submitBtn = chatInput ? chatInput.nextElementSibling : null; // Added safety check
         
-        // System Prompt for Gemini
+        // System Prompt for Gemini Chat
         const systemPrompt = `
         You are an AI assistant for Assadayut Duangma's portfolio website. You are helpful, professional, and knowledgeable about his skills (Vue.js, React, UX/UI, SEO). 
         Use the following information to answer user questions:
@@ -755,11 +966,15 @@
         let chatHistory = [];
 
         function toggleChat() {
+            if (!chatBox) {
+                console.error("Chat box element not found!");
+                return;
+            }
             const isHidden = chatBox.classList.contains('hidden');
             if (isHidden) {
                 chatBox.classList.remove('hidden', 'flex');
                 chatBox.classList.add('flex', 'chat-open');
-                setTimeout(() => chatInput.focus(), 100); // Focus input
+                setTimeout(() => chatInput && chatInput.focus(), 100); // Focus input
             } else {
                 chatBox.classList.add('hidden');
                 chatBox.classList.remove('flex', 'chat-open');
@@ -768,6 +983,7 @@
 
         async function sendMessage(e) {
             e.preventDefault();
+            if (!chatInput) return;
             const text = chatInput.value.trim();
             if (!text) return;
 
@@ -775,13 +991,12 @@
             addMessage(text, 'user');
             chatInput.value = '';
             chatInput.disabled = true;
-            submitBtn.disabled = true;
+            if (submitBtn) submitBtn.disabled = true;
 
             // Add Loading Indicator
             const loadingId = addLoading();
 
             try {
-                const apiKey = ""; // API Key will be injected by environment
                 const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -805,7 +1020,7 @@
                 addMessage("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งครับ", 'ai');
             } finally {
                 chatInput.disabled = false;
-                submitBtn.disabled = false;
+                if (submitBtn) submitBtn.disabled = false;
                 chatInput.focus();
             }
         }
@@ -862,7 +1077,75 @@
         }
 
         function scrollToBottom() {
-            chatMessages.scrollTop = chatMessages.scrollHeight;
+            if (chatMessages) chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // --- AI Project Analysis Logic ---
+        function closeProjectModal() {
+            const modal = document.getElementById('project-modal');
+            const content = modal.querySelector('.modal-enter-active');
+            if (content) content.classList.remove('modal-enter-active');
+            setTimeout(() => modal.classList.add('hidden'), 50); // Fast close
+        }
+
+        async function analyzeProject(title, category) {
+            const modal = document.getElementById('project-modal');
+            const modalContent = modal.querySelector('div[class*="modal-enter"]');
+            const titleEl = document.getElementById('modal-project-title');
+            const catEl = document.getElementById('modal-project-category');
+            const loading = document.getElementById('modal-loading');
+            const contentDiv = document.getElementById('modal-content');
+            const proseDiv = contentDiv.querySelector('.prose');
+
+            // Set Initial State
+            titleEl.textContent = title;
+            catEl.textContent = category;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex'); // Ensure flex display
+            
+            // Animation trigger
+            requestAnimationFrame(() => {
+                modalContent.classList.add('modal-enter-active');
+            });
+
+            loading.classList.remove('hidden');
+            contentDiv.classList.add('hidden');
+
+            const analysisPrompt = `
+                Analyze this portfolio project:
+                - Project Name: "${title}"
+                - Category: "${category}"
+                
+                Your Task: Write a short, impressive 3-sentence professional summary in Thai suitable for a portfolio showcase.
+                1. Explain why this type of project is valuable/challenging.
+                2. Highlight the key technical skills or UX/UI principles typically demonstrated in such a project.
+                3. End with a short engaging closing phrase.
+                
+                Tone: Professional, Insightful, Encouraging.
+            `;
+
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ role: "user", parts: [{ text: analysisPrompt }] }]
+                    })
+                });
+
+                const data = await response.json();
+                const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "ไม่สามารถวิเคราะห์ข้อมูลได้ในขณะนี้";
+
+                proseDiv.innerHTML = marked.parse(text);
+                loading.classList.add('hidden');
+                contentDiv.classList.remove('hidden');
+                
+            } catch (error) {
+                console.error("Analysis Error:", error);
+                proseDiv.innerHTML = "<p class='text-red-400'>เกิดข้อผิดพลาดในการเชื่อมต่อกับ AI กรุณาลองใหม่อีกครั้ง</p>";
+                loading.classList.add('hidden');
+                contentDiv.classList.remove('hidden');
+            }
         }
     </script>
 </body>
