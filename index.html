@@ -11,6 +11,9 @@
     <!-- Lucide Icons (ไอคอนสวยๆ) -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
+    <!-- Markdown Parser for AI responses -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
     <!-- Google Fonts -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Montserrat:wght@400;700&display=swap');
@@ -32,6 +35,23 @@
         }
         
         .nav-link.active { color: #22d3ee; }
+
+        /* Chat Widget Animations */
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .chat-open { animation: slideIn 0.3s ease-out forwards; }
+        
+        .typing-dot {
+            animation: typing 1.4s infinite ease-in-out both;
+        }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
     </style>
 </head>
 <body class="bg-slate-900 text-slate-300 selection:bg-cyan-500 selection:text-white relative">
@@ -628,6 +648,64 @@
         </div>
     </footer>
 
+    <!-- Chat Widget HTML -->
+    <div id="chat-widget-container" class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+        <!-- Chat Box -->
+        <div id="chat-box" class="bg-slate-800 w-80 sm:w-96 rounded-2xl shadow-2xl border border-slate-700 overflow-hidden hidden flex-col mb-4 transform transition-all origin-bottom-right">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-cyan-600 to-blue-700 p-4 flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                        <i data-lucide="sparkles" class="w-4 h-4 text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white text-sm">AI Assistant</h3>
+                        <p class="text-xs text-cyan-100 flex items-center gap-1">
+                            <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span> Online
+                        </p>
+                    </div>
+                </div>
+                <button onclick="toggleChat()" class="text-white/80 hover:text-white transition-colors">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            
+            <!-- Messages Area -->
+            <div id="chat-messages" class="h-80 overflow-y-auto p-4 space-y-4 bg-slate-900 scroll-smooth">
+                <!-- Welcome Message -->
+                <div class="flex gap-3">
+                    <div class="w-8 h-8 bg-cyan-600 rounded-full flex-shrink-0 flex items-center justify-center mt-1">
+                        <i data-lucide="bot" class="w-4 h-4 text-white"></i>
+                    </div>
+                    <div class="bg-slate-800 text-slate-200 p-3 rounded-2xl rounded-tl-none text-sm border border-slate-700">
+                        สวัสดีครับ! ผมเป็น AI Assistant ของคุณฟิวส์ ✨<br>
+                        มีอะไรให้ผมช่วยไหมครับ? สอบถามข้อมูลเกี่ยวกับประสบการณ์ หรือขอช่องทางติดต่อได้เลยครับ
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Input Area -->
+            <div class="p-4 bg-slate-800 border-t border-slate-700">
+                <form onsubmit="sendMessage(event)" class="relative">
+                    <input type="text" id="chat-input" 
+                        class="w-full bg-slate-900 text-white placeholder-slate-500 rounded-full pl-4 pr-12 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 border border-slate-700"
+                        placeholder="พิมพ์ข้อความที่นี่..." autocomplete="off">
+                    <button type="submit" 
+                        class="absolute right-2 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-cyan-500 rounded-full flex items-center justify-center text-slate-900 hover:bg-cyan-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                        <i data-lucide="send" class="w-4 h-4 ml-0.5"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Toggle Button -->
+        <button onclick="toggleChat()" 
+            class="group flex items-center justify-center w-14 h-14 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full shadow-lg hover:shadow-cyan-500/50 hover:scale-110 transition-all duration-300 relative">
+            <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-slate-900 z-10"></span>
+            <i data-lucide="message-circle" class="w-7 h-7 text-white group-hover:rotate-12 transition-transform"></i>
+        </button>
+    </div>
+
     <!-- Scripts -->
     <script>
         // Initialize Icons
@@ -649,6 +727,142 @@
         const mobileMenu = document.getElementById('mobile-menu');
         function toggleMenu() {
             mobileMenu.classList.toggle('hidden');
+        }
+
+        // --- Chat Widget Logic ---
+        const chatBox = document.getElementById('chat-box');
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+        const submitBtn = chatInput.nextElementSibling;
+        
+        // System Prompt for Gemini
+        const systemPrompt = `
+        You are an AI assistant for Assadayut Duangma's portfolio website. You are helpful, professional, and knowledgeable about his skills (Vue.js, React, UX/UI, SEO). 
+        Use the following information to answer user questions:
+        - **Name:** Assadayut Duangma (Fuse)
+        - **Role:** Front End Developer & UX/UI Designer
+        - **Experience:** 1. Admin Website (SEO Specialist) at Modern Tech Compat (Jan 2024 - Present)
+          2. Front-End Developer at TechEx (Jul 2022 - Jan 2023)
+          3. UX/UI Developer Intern at Avalant Global (Nov 2021 - Feb 2022)
+        - **Education:** Computer Science at University of Phayao (2022, GPA 2.57)
+        - **Skills:** HTML, CSS, JS, Vue.js, React, Tailwind, Figma, Adobe XD, SEO, Google Analytics.
+        - **Contact:** 083-486-2566, repower459@gmail.com, Line: dgunna, Location: Nan, Thailand.
+        - **Tone:** Professional, friendly, enthusiastic.
+        - **Language:** Reply in Thai primarily, or match the user's language.
+        Keep answers concise and relevant to his portfolio.
+        `;
+
+        let chatHistory = [];
+
+        function toggleChat() {
+            const isHidden = chatBox.classList.contains('hidden');
+            if (isHidden) {
+                chatBox.classList.remove('hidden', 'flex');
+                chatBox.classList.add('flex', 'chat-open');
+                setTimeout(() => chatInput.focus(), 100); // Focus input
+            } else {
+                chatBox.classList.add('hidden');
+                chatBox.classList.remove('flex', 'chat-open');
+            }
+        }
+
+        async function sendMessage(e) {
+            e.preventDefault();
+            const text = chatInput.value.trim();
+            if (!text) return;
+
+            // Add User Message
+            addMessage(text, 'user');
+            chatInput.value = '';
+            chatInput.disabled = true;
+            submitBtn.disabled = true;
+
+            // Add Loading Indicator
+            const loadingId = addLoading();
+
+            try {
+                const apiKey = ""; // API Key will be injected by environment
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [
+                            { role: "user", parts: [{ text: systemPrompt + "\nUser: " + text }] }
+                        ]
+                    })
+                });
+
+                const data = await response.json();
+                const aiResponse = data.candidates?.[0]?.content?.parts?.[0]?.text || "ขออภัยครับ ระบบขัดข้องชั่วคราว ลองใหม่อีกครั้งนะครับ";
+
+                // Remove loading and add AI message
+                removeLoading(loadingId);
+                addMessage(aiResponse, 'ai');
+
+            } catch (error) {
+                console.error('Error:', error);
+                removeLoading(loadingId);
+                addMessage("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งครับ", 'ai');
+            } finally {
+                chatInput.disabled = false;
+                submitBtn.disabled = false;
+                chatInput.focus();
+            }
+        }
+
+        function addMessage(text, sender) {
+            const div = document.createElement('div');
+            const isUser = sender === 'user';
+            
+            div.className = `flex gap-3 ${isUser ? 'flex-row-reverse' : ''}`;
+            
+            const avatar = isUser ? 
+                `<div class="w-8 h-8 bg-slate-700 rounded-full flex-shrink-0 flex items-center justify-center mt-1"><i data-lucide="user" class="w-4 h-4 text-white"></i></div>` :
+                `<div class="w-8 h-8 bg-cyan-600 rounded-full flex-shrink-0 flex items-center justify-center mt-1"><i data-lucide="bot" class="w-4 h-4 text-white"></i></div>`;
+
+            // Parse Markdown for AI responses
+            const content = isUser ? text : marked.parse(text);
+
+            div.innerHTML = `
+                ${avatar}
+                <div class="${isUser ? 'bg-cyan-600 text-white' : 'bg-slate-800 text-slate-200 border border-slate-700'} p-3 rounded-2xl ${isUser ? 'rounded-tr-none' : 'rounded-tl-none'} text-sm leading-relaxed max-w-[80%] break-words shadow-sm">
+                    ${content}
+                </div>
+            `;
+            
+            chatMessages.appendChild(div);
+            lucide.createIcons(); // Re-init icons for new message
+            scrollToBottom();
+        }
+
+        function addLoading() {
+            const id = 'loading-' + Date.now();
+            const div = document.createElement('div');
+            div.id = id;
+            div.className = 'flex gap-3';
+            div.innerHTML = `
+                <div class="w-8 h-8 bg-cyan-600 rounded-full flex-shrink-0 flex items-center justify-center mt-1">
+                    <i data-lucide="bot" class="w-4 h-4 text-white"></i>
+                </div>
+                <div class="bg-slate-800 p-4 rounded-2xl rounded-tl-none border border-slate-700 flex items-center gap-1">
+                    <div class="w-2 h-2 bg-slate-400 rounded-full typing-dot"></div>
+                    <div class="w-2 h-2 bg-slate-400 rounded-full typing-dot"></div>
+                    <div class="w-2 h-2 bg-slate-400 rounded-full typing-dot"></div>
+                </div>
+            `;
+            chatMessages.appendChild(div);
+            lucide.createIcons();
+            scrollToBottom();
+            return id;
+        }
+
+        function removeLoading(id) {
+            const el = document.getElementById(id);
+            if (el) el.remove();
+        }
+
+        function scrollToBottom() {
+            chatMessages.scrollTop = chatMessages.scrollHeight;
         }
     </script>
 </body>
