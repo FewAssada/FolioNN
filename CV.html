@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume - Assadayut Duangma</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Google Fonts -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
+        
+        body { 
+            font-family: 'Kanit', sans-serif; 
+            background-color: #f8fafc; /* Slate 50 */
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        
+        .font-head { font-family: 'Montserrat', sans-serif; }
+        
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        
+        @media print {
+            body { background-color: white; }
+            .no-print { display: none !important; }
+            .page-container {
+                box-shadow: none;
+                margin: 0;
+                width: 100%;
+                max-width: none;
+                border-radius: 0;
+                padding: 30px 40px; /* Adjust padding for print */
+            }
+        }
+
+        .page-container {
+            width: 210mm;
+            min-height: 297mm;
+            background: white;
+            margin: 2rem auto;
+            padding: 50px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+    </style>
+</head>
+<body class="text-slate-700">
+
+    <!-- Print Button -->
+    <div class="fixed bottom-6 right-6 no-print z-50">
+        <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-white font-medium py-3 px-6 rounded-full shadow-xl flex items-center gap-2 transition-all hover:-translate-y-1">
+            <i data-lucide="printer" class="w-5 h-5"></i> พิมพ์ / Save as PDF
+        </button>
+    </div>
+
+    <!-- Resume Page -->
+    <div class="page-container mx-auto">
+        <!-- Header -->
+        <header class="flex justify-between items-start mb-12 border-b border-slate-100 pb-8">
+            <div class="flex items-center gap-8">
+                <!-- Profile Image -->
+                <div class="relative">
+                    <img src="https://drive.google.com/thumbnail?id=1Nhiqv3A1x0QWl6aNUkvSC5NejSo8R-CG&sz=w500" 
+                            alt="Assadayut Duangma" 
+                            class="w-32 h-32 rounded-full object-cover shadow-sm"
+                            onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Assadayut+Duangma&background=0891b2&color=fff&size=128&bold=true'">
+                </div>
+                
+                <div>
+                    <h1 class="text-4xl font-bold text-slate-900 font-head tracking-tight">Assadayut <span class="text-cyan-600">Duangma</span></h1>
+                    <h2 class="text-xl text-slate-500 mt-2 font-medium font-head tracking-wide">Front End Developer & UX/UI Designer</h2>
+                    
+                    <div class="flex flex-wrap gap-x-4 gap-y-2 mt-4 text-sm text-slate-500">
+                        <div class="flex items-center gap-1.5">
+                            <i data-lucide="phone" class="w-4 h-4 text-cyan-600"></i> 083-486-2566
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <i data-lucide="mail" class="w-4 h-4 text-cyan-600"></i> repower459@gmail.com
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-cyan-600"></i> Nan, Thailand
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <i data-lucide="github" class="w-4 h-4 text-cyan-600"></i> github.com/assadayut23p
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-12 gap-12">
+            <!-- Left Column (Main Content) -->
+            <div class="col-span-8 space-y-10">
+                
+                <!-- Summary -->
+                <section>
+                    <h3 class="text-lg font-bold text-slate-900 uppercase tracking-wider mb-4 font-head flex items-center gap-2">
+                        <span class="w-8 h-1 bg-cyan-500 rounded-full"></span> Professional Summary
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed text-justify">
+                        Front End Developer และ UX/UI Designer ที่เชี่ยวชาญการผสานงานออกแบบ (Figma) เข้ากับการเขียนโค้ด (React, Vue.js, Tailwind CSS) มีจุดแข็งด้าน <b>SEO</b> และ <b>Performance Optimization</b> มุ่งเน้นการสร้างเว็บไซต์ที่สวยงาม โหลดเร็ว และตอบโจทย์ธุรกิจ พร้อมเรียนรู้เทคโนโลยีใหม่ๆ เพื่อยกระดับ User Experience อยู่เสมอ
+                    </p>
+                </section>
+
+                <!-- Experience -->
+                <section>
+                    <h3 class="text-lg font-bold text-slate-900 uppercase tracking-wider mb-6 font-head flex items-center gap-2">
+                        <span class="w-8 h-1 bg-cyan-500 rounded-full"></span> Work Experience
+                    </h3>
+                    
+                    <div class="space-y-8 border-l-2 border-slate-100 pl-6 relative">
+                        <!-- Job 1 -->
+                        <div class="relative">
+                            <span class="absolute -left-[31px] top-1 w-4 h-4 bg-white border-4 border-cyan-500 rounded-full"></span>
+                            <div class="flex justify-between items-baseline mb-1">
+                                <h4 class="text-xl font-bold text-slate-800">Admin Website (SEO Specialist)</h4>
+                                <span class="text-sm font-medium text-cyan-600">Jan 2024 - Present</span>
+                            </div>
+                            <div class="text-slate-500 font-medium mb-3">Modern Tech Compat Co., Ltd</div>
+                            <ul class="list-disc list-outside ml-4 text-sm text-slate-600 space-y-2 leading-relaxed">
+                                <li><b>Web Management:</b> บริหารจัดการภาพรวมเว็บไซต์ ปรับปรุง Site Health ให้มีความเสถียรสูงสุด</li>
+                                <li><b>Technical SEO:</b> วางแผน Technical SEO และทำ Structured Data เพื่อเพิ่มผลลัพธ์การค้นหา</li>
+                                <li><b>Optimization:</b> วิเคราะห์และแก้ไขปัญหา Page Speed เพื่อประสบการณ์การใช้งานที่ดีเยี่ยม</li>
+                            </ul>
+                        </div>
+
+                        <!-- Job 2 -->
+                        <div class="relative">
+                            <span class="absolute -left-[31px] top-1 w-4 h-4 bg-white border-4 border-slate-300 rounded-full"></span>
+                            <div class="flex justify-between items-baseline mb-1">
+                                <h4 class="text-xl font-bold text-slate-800">Front-End Developer</h4>
+                                <span class="text-sm font-medium text-slate-400">Jul 2022 - Jan 2023</span>
+                            </div>
+                            <div class="text-slate-500 font-medium mb-3">TechEx Co., Ltd</div>
+                            <ul class="list-disc list-outside ml-4 text-sm text-slate-600 space-y-2 leading-relaxed">
+                                <li><b>Implementation:</b> พัฒนา Web App ด้วย Tech Stack สมัยใหม่ สร้าง UI ที่ลื่นไหล</li>
+                                <li><b>Responsive:</b> ออกแบบ Layout ให้รองรับทุกอุปกรณ์ (Cross-device compatibility)</li>
+                                <li><b>Maintenance:</b> ดูแลรักษาและปรับปรุงโค้ด (Clean Code) ให้ง่ายต่อการพัฒนาต่อ</li>
+                            </ul>
+                        </div>
+
+                        <!-- Job 3 -->
+                        <div class="relative">
+                            <span class="absolute -left-[31px] top-1 w-4 h-4 bg-white border-4 border-slate-300 rounded-full"></span>
+                            <div class="flex justify-between items-baseline mb-1">
+                                <h4 class="text-xl font-bold text-slate-800">UX/UI Developer (Intern)</h4>
+                                <span class="text-sm font-medium text-slate-400">Nov 2021 - Feb 2022</span>
+                            </div>
+                            <div class="text-slate-500 font-medium mb-3">Avalant Global Co., Ltd</div>
+                            <ul class="list-disc list-outside ml-4 text-sm text-slate-600 space-y-2 leading-relaxed">
+                                <li><b>Design to Code:</b> แปลง Mockups เป็นหน้าเว็บจริงด้วย HTML, CSS, JS</li>
+                                <li><b>UI Layout:</b> ร่วมออกแบบ Layout ใหม่ๆ เพื่อความสวยงามและใช้งานง่าย</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Projects (Clean List Style) -->
+                <section>
+                    <h3 class="text-lg font-bold text-slate-900 uppercase tracking-wider mb-6 font-head flex items-center gap-2">
+                        <span class="w-8 h-1 bg-cyan-500 rounded-full"></span> Key Projects
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start justify-between group">
+                            <div>
+                                <h5 class="font-bold text-slate-800 group-hover:text-cyan-600 transition-colors">RanNotebook.com <span class="text-slate-400 font-normal text-sm ml-2">| Web Management</span></h5>
+                                <p class="text-sm text-slate-600 mt-1">Managed speed tuning & SEO optimization for laptop spare parts.</p>
+                            </div>
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-300 group-hover:text-cyan-500 transition-colors"></i>
+                        </div>
+                        <div class="w-full h-px bg-slate-100"></div>
+                        
+                        <div class="flex items-start justify-between group">
+                            <div>
+                                <h5 class="font-bold text-slate-800 group-hover:text-cyan-600 transition-colors">BattNotebook.com <span class="text-slate-400 font-normal text-sm ml-2">| Web Management</span></h5>
+                                <p class="text-sm text-slate-600 mt-1">Designed Mobile UI & optimized keywords for battery marketplace.</p>
+                            </div>
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-300 group-hover:text-cyan-500 transition-colors"></i>
+                        </div>
+                        <div class="w-full h-px bg-slate-100"></div>
+
+                        <div class="flex items-start justify-between group">
+                            <div>
+                                <h5 class="font-bold text-slate-800 group-hover:text-cyan-600 transition-colors">RamServer-HddServer <span class="text-slate-400 font-normal text-sm ml-2">| Web Management</span></h5>
+                                <p class="text-sm text-slate-600 mt-1">Implemented Technical SEO & Structured Data for enterprise hardware.</p>
+                            </div>
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-300 group-hover:text-cyan-500 transition-colors"></i>
+                        </div>
+                        <div class="w-full h-px bg-slate-100"></div>
+
+                        <div class="flex items-start justify-between group">
+                            <div>
+                                <h5 class="font-bold text-slate-800 group-hover:text-cyan-600 transition-colors">GetAPI & PassGen <span class="text-slate-400 font-normal text-sm ml-2">| Personal Projects</span></h5>
+                                <p class="text-sm text-slate-600 mt-1">GitHub Projects demonstrating API integration and JavaScript logic.</p>
+                            </div>
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-300 group-hover:text-cyan-500 transition-colors"></i>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Column (Sidebar) -->
+            <div class="col-span-4 space-y-10">
+                
+                <!-- Education -->
+                <section>
+                    <h3 class="text-lg font-bold text-slate-900 uppercase tracking-wider mb-5 font-head">Education</h3>
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-100">
+                        <h4 class="font-bold text-slate-800">University of Phayao</h4>
+                        <div class="text-cyan-600 font-bold text-sm my-1">Bachelor of Science</div>
+                        <div class="text-slate-600 text-sm">Computer Science</div>
+                        <div class="text-slate-400 text-xs mt-2 pt-2 border-t border-slate-200">Graduated 2022 • GPA 2.57</div>
+                    </div>
+                </section>
+
+                <!-- Skills -->
+                <section>
+                    <h3 class="text-lg font-bold text-slate-900 uppercase tracking-wider mb-5 font-head">Skills</h3>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex items-center gap-2 text-sm font-bold text-slate-700 mb-2">
+                                <i data-lucide="code-2" class="w-4 h-4 text-cyan-500"></i> Core & Frameworks
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-white border border-slate-200 text-slate-600 text-xs rounded-full shadow-sm">HTML5</span>
+                                <span class="px-3 py-1 bg-white border border-slate-200 text-slate-600 text-xs rounded-full shadow-sm">CSS3</span>
+                                <span class="px-3 py-1 bg-white border border-slate-200 text-slate-600 text-xs rounded-full shadow-sm">JavaScript</span>
+                                <span class="px-3 py-1 bg-cyan-50 border border-cyan-100 text-cyan-700 text-xs rounded-full shadow-sm font-semibold">Vue.js</span>
+                                <span class="px-3 py-1 bg-cyan-50 border border-cyan-100 text-cyan-700 text-xs rounded-full shadow-sm font-semibold">React</span>
+                                <span class="px-3 py-1 bg-white border border-slate-200 text-slate-600 text-xs rounded-full shadow-sm">Tailwind</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center gap-2 text-sm font-bold text-slate-700 mb-2">
+                                <i data-lucide="palette" class="w-4 h-4 text-cyan-500"></i> Design
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-white border border-slate-200 text-slate-600 text-xs rounded-full shadow-sm">Figma</span>
+                                <span class="px-3 py-1 bg-white border border-slate-200 text-slate-600 text-xs rounded-full shadow-sm">Adobe XD</span>
+                                <span class="px-3 py-1 bg-white border border-slate-200 text-slate-600 text-xs rounded-full shadow-sm">Photoshop</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center gap-2 text-sm font-bold text-slate-700 mb-2">
+                                <i data-lucide="bar-chart-2" class="w-4 h-4 text-cyan-500"></i> SEO & Tools
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-white border border-slate-200 text-slate-600 text-xs rounded-full shadow-sm">Search Console</span>
+                                <span class="px-3 py-1 bg-white border border-slate-200 text-slate-600 text-xs rounded-full shadow-sm">GA4</span>
+                                <span class="px-3 py-1 bg-white border border-slate-200 text-slate-600 text-xs rounded-full shadow-sm">Ahrefs</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Soft Skills -->
+                <section>
+                    <h3 class="text-lg font-bold text-slate-900 uppercase tracking-wider mb-5 font-head">Soft Skills</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3 text-sm text-slate-600">
+                            <i data-lucide="check" class="w-4 h-4 text-cyan-500 mt-0.5"></i>
+                            User-Centered Design
+                        </li>
+                        <li class="flex items-start gap-3 text-sm text-slate-600">
+                            <i data-lucide="check" class="w-4 h-4 text-cyan-500 mt-0.5"></i>
+                            Analytical Thinking
+                        </li>
+                        <li class="flex items-start gap-3 text-sm text-slate-600">
+                            <i data-lucide="check" class="w-4 h-4 text-cyan-500 mt-0.5"></i>
+                            Cross-functional Teamwork
+                        </li>
+                        <li class="flex items-start gap-3 text-sm text-slate-600">
+                            <i data-lucide="check" class="w-4 h-4 text-cyan-500 mt-0.5"></i>
+                            Continuous Learning
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="mt-16 pt-6 border-t border-slate-100 text-center">
+            <p class="text-xs text-slate-400">© 2024 Assadayut Duangma - References available upon request.</p>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
